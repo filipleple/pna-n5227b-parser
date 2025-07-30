@@ -41,7 +41,7 @@ The measurement tracks how the **impulse response evolves over frequency** while
 ## 🚀 CLI Usage
 
 ```bash
-python scripts/main.py path/to/vna_data.csv [--animate]
+python -m scripts.analyze wyniki/Results_20250505091345.txt [--animate]
 ````
 
 ### Example output:
