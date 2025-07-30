@@ -1,2 +1,5 @@
 scikit-rf
 matplotlib
+numpy
+pandas
+scipy
