@@ -4,6 +4,7 @@ from impulse_resp.plotting import plot_trace_block, animate_traces
 
 import argparse
 import numpy as np
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument("file", help="Path to CIR CSV file")
@@ -17,6 +18,23 @@ for trace_name in traces:
     results = [analyze_cir(time, trace) for trace in traces[trace_name]]
     avg_delay = np.mean([r["mu_tau_ns"] for r in results])
     print("Average delay:", avg_delay, "ns")
+
+
+# Accumulate analysis results
+rows = []
+for trace_name in traces:
+    results = [analyze_cir(time, trace) for trace in traces[trace_name]]
+    avg = {key: np.mean([r[key] for r in results]) for key in results[0]}
+    avg["trace"] = trace_name
+    rows.append(avg)
+
+# Create ITU-style summary DataFrame
+df = pd.DataFrame(rows)
+df = df[["trace", "mu_tau_ns", "rms_tau_ns", "max_excess_delay_ns",
+         "multipath_components", "avg_power_dB", "peak_power_dB"]]
+
+print("\n=== ITU-R Style Multipath Summary ===")
+print(df.to_string(index=False))
 
 plot_trace_block(time, {k: v for k, v in traces.items()})
 
