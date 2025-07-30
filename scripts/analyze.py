@@ -30,8 +30,18 @@ for trace_name in traces:
 
 # Create ITU-style summary DataFrame
 df = pd.DataFrame(rows)
-df = df[["trace", "mu_tau_ns", "rms_tau_ns", "max_excess_delay_ns",
-         "multipath_components", "avg_power_dB", "peak_power_dB"]]
+df = df[[
+    "trace",
+    "mu_tau_ns",
+    "rms_tau_ns",
+    "max_excess_delay_ns",
+    "multipath_components",
+    "coherence_bw_MHz",
+    "energy_pct_first_20ns",
+    "pdp_kurtosis",
+    "avg_power_dB",
+    "peak_power_dB"
+]]
 
 print("\n=== ITU-R Style Multipath Summary ===")
 print(df.to_string(index=False))
