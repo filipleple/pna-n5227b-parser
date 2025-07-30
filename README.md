@@ -40,6 +40,16 @@ The measurement tracks how the **impulse response evolves over frequency** while
 
 ## 🚀 CLI Usage
 
+### Setup
+
+```bash
+λ virtualenv venv
+λ source venv/bin/activate
+λ pip install -r requirements.txt  
+```
+
+### Usage
+
 ```bash
 python -m scripts.analyze wyniki/Results_20250505091345.txt [--animate]
 ````
